@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata: 
+  name: registry-key
+  namespace: default
+data:
+  .dockerconfigjson: ewoJImF1dGhzIjogewoJCSJoYXJib3IuaWxraWZvcm1hdGlvbi5mciI6IHsKCQkJImF1dGgiOiAiYXpoek9rczRjM0JoYzNOM2IzSmsiCgkJfQoJfQp9
+type: kubernetes.io/dockerconfigjson

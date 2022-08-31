@@ -1,0 +1,16 @@
+expose: 
+  type: ingress
+  tls: 
+    enabled: true
+    certSource: auto
+  ingress: 
+    hosts: 
+      core: harbor.ilkiformation.fr
+      notary: notary.ilkiformation.fr
+internalTLS: 
+  enabled: true
+  certSource: auto
+persistence: 
+  enabled: true
+harborAdminPassword: MySecretPassword@Azerty2020!
+externalURL: https://harbor.ilkiformation.fr

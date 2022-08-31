@@ -1,0 +1,31 @@
+--- 
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  name: registry-etc-hosts
+  namespace: registry
+  labels: 
+    k8s-app: registry-etc-hosts
+spec: 
+  selector: 
+    matchLabels: 
+      k8s-app: registry-etc-hosts
+  template: 
+    metadata: 
+      labels: 
+        k8s-app: registry-etc-hosts
+    spec: 
+      containers:       
+      - name: registry-etc-hosts
+        image: busybox
+        command: [ 'sh' ]
+        args: [ '-c', 'echo "35.180.5.204 harbor.ilkiformation.fr" >> /etc/hosts && exec tail -f /dev/null' ] 
+        volumeMounts:         
+        - name: etc-hosts
+          mountPath: /etc/hosts
+      terminationGracePeriodSeconds: 30
+      volumes:       
+      - name: etc-hosts
+        hostPath: 
+          path: /etc/hosts
+

@@ -1,0 +1,35 @@
+--- 
+apiVersion: apps/v1
+kind: DaemonSet
+metadata: 
+  name: registry-ca
+  namespace: registry
+  labels: 
+    k8s-app: registry-ca
+spec: 
+  selector: 
+    matchLabels: 
+      k8s-app: registry-ca
+  template: 
+    metadata: 
+      labels: 
+        k8s-app: registry-ca
+    spec: 
+      containers:       
+      - name: registry-ca
+        image: busybox
+        command: [ 'sh' ] 
+        args: [ '-c', 'cp /home/core/ca.crt /etc/docker/certs.d/harbor.ilkiformation.fr/ca.crt && exec tail -f /dev/null' ] 
+        volumeMounts:         
+        - name: etc-docker
+          mountPath: /etc/docker/certs.d/harbor.ilkiformation.fr        
+        - name: ca-cert
+          mountPath: /home/core
+      terminationGracePeriodSeconds: 30
+      volumes:       
+      - name: etc-docker
+        hostPath: 
+          path: /etc/docker/certs.d/harbor.ilkiformation.fr      
+      - name: ca-cert
+        secret:
+          secretName: registry-ca-projet1
