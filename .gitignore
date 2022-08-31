@@ -1,0 +1,5 @@
+# ignore certificate
+ca.crt
+
+# ignore nginx-13.2.2.tgz
+nginx-13.2.2.tgz
